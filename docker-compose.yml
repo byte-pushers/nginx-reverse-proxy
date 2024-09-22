@@ -1,0 +1,18 @@
+services:
+  web:
+    container_name: bp-web-nginx-container
+    image: tontepouncil/nginx-reverse-proxy:latest
+    #volumes:
+    #  - ./templates:/etc/nginx/templates
+    ports:
+      - 80:80
+    expose:
+      - 80
+    #environment:
+    #  - NGINX_HOST=foobar.com
+    #  - NGINX_PORT=80
+    networks:
+      - internalnet
+networks:
+  internalnet:
+    driver: bridge
