@@ -1,9 +1,20 @@
 server {
     listen 80;
-    #listen [::]:80;
+    listen [::]:80;
+    server_name bytepushers.services;
+
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
     server_name bytepushers.services;
 
     #root /usr/share/nginx/html; # Serves static files if no proxy match
+
+    ssl_certificate /etc/nginx/ssl/33da7fb58b956050.crt;
+    ssl_certificate_key /etc/nginx/ssl/gd-generated-private-key.key;
 
     location / {
         proxy_pass http://bp-web:4000;

@@ -1,7 +1,18 @@
 server {
     listen 80;
-    #listen [::]:80;
+    listen [::]:80;
     server_name familyreunions.online;
+
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name familyreunions.online;
+
+    ssl_certificate /etc/nginx/ssl/33da7fb58b956050.crt;
+    ssl_certificate_key /etc/nginx/ssl/gd-generated-private-key.key;
 
     #root /usr/share/nginx/html; # Serves static files if no proxy match
 
